@@ -72,20 +72,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
-  // A MÁGICA DA CORREÇÃO ESTÁ AQUI
   const totalPrice = cartItems.reduce((total, item) => {
     const priceString = item.price || 'R$ 0,00';
-    // 1. Usa uma expressão regular para remover tudo que não for dígito ou vírgula.
     const onlyNumbersAndComma = priceString.replace(/[^\d,]/g, '');
-    // 2. Troca a vírgula por ponto para o parseFloat entender.
     const priceNumber = parseFloat(onlyNumbersAndComma.replace(',', '.'));
 
-    // 3. Se o resultado for um número válido, soma ao total.
     if (!isNaN(priceNumber)) {
       return total + (priceNumber * item.quantity);
     }
     
-    // 4. Se não for um número válido, apenas retorna o total sem somar.
     return total;
   }, 0);
 

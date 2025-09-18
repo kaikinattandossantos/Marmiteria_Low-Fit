@@ -1,16 +1,32 @@
+"use client";
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Star } from "lucide-react"
 
-export function PlansSection() {
-  // 1. Dados atualizados com base na foto dos combos
-  const plans = [
+// Define o tipo do plano para consistência
+type Plan = {
+  name: string;
+  quantity: number;
+  totalPrice: number;
+  unitPrice: number;
+  popular: boolean;
+  description: string;
+};
+
+// Adiciona a nova prop 'onSelectPlan'
+interface PlansSectionProps {
+  onSelectPlan: (plan: Plan) => void;
+}
+
+export function PlansSection({ onSelectPlan }: PlansSectionProps) {
+  const plans: Plan[] = [
     {
       name: "Combo 10 Refeições",
       quantity: 10,
       totalPrice: 180,
-      unitPrice: 18.00, // 180 / 10
+      unitPrice: 18.00,
       popular: false,
       description: "Escolha 10 opções, podendo repetir. Entregamos em 24h.",
     },
@@ -18,7 +34,7 @@ export function PlansSection() {
       name: "Combo 14 Refeições",
       quantity: 14,
       totalPrice: 245,
-      unitPrice: 17.50, // 245 / 14
+      unitPrice: 17.50,
       popular: true,
       description: "Escolha 14 opções, podendo repetir. Entregamos em 24h.",
     },
@@ -26,11 +42,11 @@ export function PlansSection() {
       name: "Combo 20 Refeições",
       quantity: 20,
       totalPrice: 340,
-      unitPrice: 17.00, // 340 / 20
+      unitPrice: 17.00,
       popular: false,
       description: "Escolha 20 opções, podendo repetir. Entregamos em 24h.",
     },
-  ]
+  ];
 
   return (
     <section id="planos" className="py-20 bg-background">
@@ -59,23 +75,20 @@ export function PlansSection() {
                 <div className="mt-4">
                   <span className="text-4xl font-bold text-primary">R$ {plan.totalPrice.toFixed(2).replace('.', ',')}</span>
                 </div>
-                {/* 2. Descrição adicionada para dar mais detalhes */}
                 <div className="text-sm text-muted-foreground mt-2 px-4 h-12">
                   {plan.description}
                 </div>
-                 {/* 3. Cálculo do preço unitário atualizado */}
                 <div className="text-lg text-secondary font-medium mt-2">
                   (R$ {plan.unitPrice.toFixed(2).replace('.', ',')} por refeição)
                 </div>
               </CardHeader>
 
               <CardContent className="flex flex-col flex-grow justify-between p-6 pt-2">
-                {/* O botão foi mantido, mas você pode querer adicionar uma lógica
-                    para levar a uma página de seleção de marmitas do combo */}
                 <Button
                   className="w-full mt-4"
                   variant={plan.popular ? "default" : "outline"}
                   size="lg"
+                  onClick={() => onSelectPlan(plan)}
                 >
                   Selecionar Combo
                 </Button>
@@ -94,5 +107,5 @@ export function PlansSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
