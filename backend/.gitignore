@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# Virtualenv
+env/
+venv/
+ENV/
+.venv/
+
+# IDEs e editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+*.out
+*.err
+
+# Cache e build
+dist/
+build/
+*.egg-info/
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Banco de dados SQLite (se usar)
+*.db
+*.sqlite3
+
+# Mac/Linux/Windows específicos
+.DS_Store
+Thumbs.db
